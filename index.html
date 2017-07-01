@@ -31,6 +31,7 @@
       }
       holder.ondrop = (e) => {
         e.preventDefault()
+        $("#tree").jstree("destroy");
         for (let f of e.dataTransfer.files) {
           // console.log('File(s) you dragged here: ', )
           const files = litMove.listFiles(f.path);
@@ -47,13 +48,13 @@
             };
           });
           console.log(treeFiles);
-          $(function() {
-            $('#tree').jstree({
-              'core' : {
-                'data' : treeFiles
-              }
-            });
+
+          $('#tree').jstree({
+            'core' : {
+              'data' : treeFiles
+            }
           });
+
         }
         return false;
       }
