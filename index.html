@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
     <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="dist/themes/default/style.min.css" />
   </head>
   <body>
     <h1>Hello World!</h1>
@@ -13,9 +14,14 @@
     <div id="holder">
       Drag your file here
     </div>
-
+    <hr>
+    <div id="tree">
+    </div>
     <script>
       const litMove = require('litmove');
+      const $ = require('jquery');
+      const _ = require('lodash');
+      const jstree = require('jstree');
       const holder = document.getElementById('holder');
       holder.ondragover = () => {
         return false;
@@ -26,10 +32,32 @@
       holder.ondrop = (e) => {
         e.preventDefault()
         for (let f of e.dataTransfer.files) {
-          console.log('File(s) you dragged here: ', litMove.listFiles(f.path))
+          // console.log('File(s) you dragged here: ', )
+          const files = litMove.listFiles(f.path);
+          const pairs = _.toPairs(files);
+          const treeFiles = _.map(pairs, function(x) {
+            const children = _.map(x[1], function(c) {
+              return {
+                'text' : c
+              };
+            });
+            return {
+              'text' : x[0],
+              'children': children
+            };
+          });
+          console.log(treeFiles);
+          $(function() {
+            $('#tree').jstree({
+              'core' : {
+                'data' : treeFiles
+              }
+            });
+          });
         }
         return false;
       }
+
     </script>
 
   </body>

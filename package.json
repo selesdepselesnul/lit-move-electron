@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jstree": "^3.3.4",
     "litmove": "0.0.1"
   }
 }
