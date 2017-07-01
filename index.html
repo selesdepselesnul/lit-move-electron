@@ -7,12 +7,8 @@
     <link rel="stylesheet" href="dist/themes/default/style.min.css" />
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
     <div id="holder">
-      Drag your file here
+      <h1>Drag your file here</h1>
     </div>
     <hr>
     <div id="tree">
@@ -42,7 +38,8 @@
       }
       holder.ondrop = (e) => {
         e.preventDefault()
-        $("#tree").jstree("destroy");
+
+        $('#tableBody').html('');
 
         for (let f of e.dataTransfer.files) {
           // console.log('File(s) you dragged here: ', )
@@ -66,10 +63,12 @@
                 <tr class="active">
                   <td>${index+1}</td>
                   <td>
-                    <div id="fileTree${index}">
+                    <div id="fileTree${index}" class="fileTree">
                     </div>
                   </td>
-                  <td></td>
+                  <td>
+                    <input class="form-control input-sm" type="text" id="inputSmall">
+                  </td>
                 </tr>
               `);
             $(`#fileTree${index}`).jstree({
@@ -78,11 +77,6 @@
               }
             });
           });
-          // $('#tree').jstree({
-          //   'core' : {
-          //     'data' : treeFiles
-          //   }
-          // });
 
         }
         return false;
