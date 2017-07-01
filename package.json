@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit_move_api": "^1.0.0"
+    "litmove": "0.0.1"
   }
 }

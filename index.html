@@ -15,7 +15,8 @@
     </div>
 
     <script>
-      const holder = document.getElementById('holder')
+      const litMove = require('litmove');
+      const holder = document.getElementById('holder');
       holder.ondragover = () => {
         return false;
       }
@@ -25,7 +26,7 @@
       holder.ondrop = (e) => {
         e.preventDefault()
         for (let f of e.dataTransfer.files) {
-          console.log('File(s) you dragged here: ', f.path)
+          console.log('File(s) you dragged here: ', litMove.listFiles(f.path))
         }
         return false;
       }
